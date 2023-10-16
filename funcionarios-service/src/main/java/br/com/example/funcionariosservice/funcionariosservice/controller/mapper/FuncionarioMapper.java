@@ -4,8 +4,12 @@ import br.com.example.funcionariosservice.funcionariosservice.controller.dto.Fun
 import br.com.example.funcionariosservice.funcionariosservice.controller.exception.InvalidCpfException;
 import br.com.example.funcionariosservice.funcionariosservice.entity.FuncionarioEntity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class FuncionarioMapper {
-    public FuncionarioEntity passerFuncionarioDtoParaFuncionario(FuncionarioDto funcionarioDto) throws Exception {
+    public static FuncionarioEntity passerFuncionarioDtoParaFuncionario(FuncionarioDto funcionarioDto) throws Exception {
         FuncionarioEntity entity = new FuncionarioEntity();
         entity.setNome(funcionarioDto.getNome());
         entity.setSobrenome(funcionarioDto.getSobrenome());
@@ -21,19 +25,21 @@ public class FuncionarioMapper {
         //precisa validar
         entity.setChefiaId(funcionarioDto.getChefiaId());
         entity.setChefiaNome(funcionarioDto.getChefiaNome());
+
+        entity.setDataCriacao(new Date());
+        entity.setDataDeContratacao(funcionarioDto.getDataDeContratacao());
+        entity.setDataDeNascimento(funcionarioDto.getDataDeNascimento());
+
         entity.setEnderecoCompleto(funcionarioDto.getCidade()+
                 ", "+funcionarioDto.getEstado()+
                 ", "+funcionarioDto.getCep());
 
         //precisa validar se as datas estão corretas
-        entity.setDataDeContratacao(funcionarioDto.getDataDeContratacao());
-        entity.setDataDeNascimento(funcionarioDto.getDataDeNascimento());
         if(isValidCPF(funcionarioDto.getCpf())) entity.setCpf(funcionarioDto.getCpf());
         return entity;
     }
 
-
-    public static boolean isValidCPF(String cpf) throws Exception {
+    private static boolean isValidCPF(String cpf) throws Exception {
         // Verifica se o CPF tem 11 dígitos
         if (cpf.length() != 11) {
             throw new InvalidCpfException("CPF deve ter 11 dígitos");

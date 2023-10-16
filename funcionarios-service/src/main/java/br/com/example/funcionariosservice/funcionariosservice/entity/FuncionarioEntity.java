@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 import br.com.example.funcionariosservice.funcionariosservice.enumeration.Sexo;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -27,17 +28,18 @@ public class FuncionarioEntity {
     private String sobrenome;
 
     @Column(name = "data_de_nascimento")
-    private LocalDate dataDeNascimento;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private Date dataDeNascimento;
 
     @Column(name = "sexo")
     private Sexo sexo;
 
-    @ManyToOne
-    @JoinColumn(name = "cargo_id")
+    @Column(name = "cargo_id")
     private Long cargo_id;
 
     @Column(name = "data_de_contratacao")
-    private LocalDate dataDeContratacao;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private Date dataDeContratacao;
 
     @Column(name = "salario")
     private double salario;
