@@ -20,7 +20,6 @@ public class SetorEntity {
     @Column(name = "descricao")
     private String descricao;
 
-    @Column(name = "salario_base")
-    private double salarioBase;
+
 
 }

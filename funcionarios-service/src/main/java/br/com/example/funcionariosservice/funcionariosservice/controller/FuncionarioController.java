@@ -1,7 +1,7 @@
 package br.com.example.funcionariosservice.funcionariosservice.controller;
 
 import br.com.example.funcionariosservice.funcionariosservice.controller.dto.FuncionarioDto;
-import br.com.example.funcionariosservice.funcionariosservice.controller.mapper.FuncionarioMapper;
+import br.com.example.funcionariosservice.funcionariosservice.controller.mapper.RecursosHumanosContratosMapper;
 import br.com.example.funcionariosservice.funcionariosservice.entity.FuncionarioEntity;
 import br.com.example.funcionariosservice.funcionariosservice.services.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class FuncionarioController {
     @RequestMapping("/novo")
     public ResponseEntity<Object> criarCadastroNovoFuncionario(@RequestBody FuncionarioDto funcionario) {
         try {
-            FuncionarioEntity entity = FuncionarioMapper.passerFuncionarioDtoParaFuncionario(funcionario);
+            FuncionarioEntity entity = RecursosHumanosContratosMapper.passerFuncionarioDtoParaFuncionario(funcionario);
             FuncionarioEntity response = service.salvar(entity);
             return new ResponseEntity<>(response, HttpStatus.CREATED);
         } catch (Exception e) {

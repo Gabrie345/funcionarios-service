@@ -20,11 +20,7 @@ public class CargoEntity {
     @Column(name = "descricao")
     private String descricao;
 
-    @Column(name = "salario_base")
-    private double salarioBase;
-
-    @ManyToOne
-    @JoinColumn(name = "setor_id")
-    private SetorEntity setor;
+    @Column(name = "setor_id")
+    private Long setorId;
 
 }

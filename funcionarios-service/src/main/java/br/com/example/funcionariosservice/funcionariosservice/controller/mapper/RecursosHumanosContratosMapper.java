@@ -1,14 +1,14 @@
 package br.com.example.funcionariosservice.funcionariosservice.controller.mapper;
 
+import br.com.example.funcionariosservice.funcionariosservice.controller.dto.CargoDto;
 import br.com.example.funcionariosservice.funcionariosservice.controller.dto.FuncionarioDto;
 import br.com.example.funcionariosservice.funcionariosservice.controller.exception.InvalidCpfException;
+import br.com.example.funcionariosservice.funcionariosservice.entity.CargoEntity;
 import br.com.example.funcionariosservice.funcionariosservice.entity.FuncionarioEntity;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class FuncionarioMapper {
+public class RecursosHumanosContratosMapper {
     public static FuncionarioEntity passerFuncionarioDtoParaFuncionario(FuncionarioDto funcionarioDto) throws Exception {
         FuncionarioEntity entity = new FuncionarioEntity();
         entity.setNome(funcionarioDto.getNome());
@@ -36,6 +36,16 @@ public class FuncionarioMapper {
 
         //precisa validar se as datas estão corretas
         if(isValidCPF(funcionarioDto.getCpf())) entity.setCpf(funcionarioDto.getCpf());
+        return entity;
+    }
+    public static CargoEntity passerCargoDtoParaCargo(CargoDto cargoDto) {
+
+        CargoEntity entity = new CargoEntity();
+        entity.setNomeDoCargo(cargoDto.getNomeCargo());
+        entity.setDescricao(cargoDto.getDescricao());
+
+        //precisa Validar se existe o setor
+        entity.setSetorId(cargoDto.getSetorId());
         return entity;
     }
 
